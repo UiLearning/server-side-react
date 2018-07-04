@@ -1,4 +1,5 @@
 import express from "express";
+import cors from 'cors';
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { StaticRouter, matchPath } from "react-router-dom";
@@ -10,6 +11,8 @@ process.env.NODE_ENV = 'development';
 const PORT = process.env.PORT || 3000;
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.static("public"));
 
