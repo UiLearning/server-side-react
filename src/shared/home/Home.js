@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { Button } from 'react-bootstrap'
 
 class Home extends Component {
   render() {
@@ -15,6 +16,8 @@ class Home extends Component {
         </aside>
         <article>
           <h1>News page</h1>
+          <Button bsStyle='primary' bsSize='large'>Click</Button>
+
         </article>
         <figure>
         </figure>
