@@ -1,6 +1,7 @@
 import express from "express";
 import cors from 'cors';
 import React from "react";
+import path from "path";
 import { renderToString } from "react-dom/server";
 import { StaticRouter, matchPath } from "react-router-dom";
 import routes from "../shared/routes";
@@ -14,7 +15,7 @@ const app = express();
 
 app.use(cors());
 
-app.use(express.static("public"));
+app.use(express.static('public'))
 
 app.get("*", (req, res, next) => { 
     const activeRoute = routes.find((route) => matchPath(req.url, route)) || {};
@@ -33,7 +34,7 @@ app.get("*", (req, res, next) => {
             <!DOCTYPE html>
             <head>
                 <title>React App</title>
-                <link rel="stylesheet" href="/css/main.css>
+                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
                 <script src="/bundle.js" defer></script>
                 <script>window.__INITIAL_DATA__=${serialize(data)}</script>
             </head>

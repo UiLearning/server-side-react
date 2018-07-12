@@ -1,5 +1,8 @@
-import Home from "./home/Home";
-import News from "./news/News";
+import Home from "./Home/Home";
+import AddProduct from "./AddProduct/AddProduct";
+import SearchProduct from "./SearchProduct/SearchProduct";
+import ScheduleProduct from "./ScheduleProduct/ScheduleProduct";
+
 
 const routes = [
     {
@@ -8,8 +11,16 @@ const routes = [
         exact: true
     },
     {
-        path: "/news",
-        component: News
+        path: "/addProduct",
+        component: AddProduct
+    },
+    {
+        path: "/searchProduct",
+        component: SearchProduct
+    },
+    {
+        path: "/scheduleProduct",
+        component: ScheduleProduct
     }
 ];
 

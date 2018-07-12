@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { Switch, Route } from "react-router-dom";
 import routes from "./routes";
-import 'bootstrap/scss/bootstrap.scss';
-import Navbar from "./Navbar/Navbar";
+import Header from "./Navbar/Navbar";
 
 class App extends Component {
     render() {
         return (
             <div>
-                <Navbar/>
+                <Header/>
                 <Switch>
                     {routes.map(({path, exact, component: C, ...rest}) => (
                         <Route

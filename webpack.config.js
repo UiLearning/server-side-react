@@ -1,6 +1,7 @@
 var path = require('path')
 var webpack = require('webpack')
 var nodeExternals = require('webpack-node-externals')
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var clientConfig = {
   entry: './src/client/index.js',
@@ -13,18 +14,26 @@ var clientConfig = {
     rules: [
       { test: /\.(js)$/, use: 'babel-loader' },
       {
-        test: /\.scss$/,
-        use: [
-            "style-loader", // creates style nodes from JS strings
-            "css-loader", // translates CSS into CommonJS
-            "sass-loader" // compiles Sass to CSS
-        ]
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [{
+            loader: "css-loader",
+            options: {
+              // If you are having trouble with urls not resolving add this setting.
+              // See https://github.com/webpack-contrib/css-loader#url
+              url: false,
+              minimize: true,
+              sourceMap: true
+            }
+          }]
+        })
       },
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
         use: [
           {
-            loader: 'url-loader',
+            loader: 'file-loader',
             options: {
               limit: 8192
             }
@@ -36,7 +45,12 @@ var clientConfig = {
   plugins: [
     new webpack.DefinePlugin({
       __isBrowser__: "true"
-    })
+    }),
+    new ExtractTextPlugin({
+      filename: 'main.css',
+      disable: false,
+      allChunks: true
+  })
   ]
 }
 
@@ -51,26 +65,7 @@ var serverConfig = {
   },
   module: {
     rules: [
-      { test: /\.(js)$/, use: 'babel-loader' },
-      {
-        test: /\.scss$/,
-        use: [
-            "style-loader", // creates style nodes from JS strings
-            "css-loader", // translates CSS into CommonJS
-            "sass-loader" // compiles Sass to CSS
-        ]
-      },
-      {
-        test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192
-            }
-          }
-        ]
-      }
+      { test: /\.(js)$/, use: 'babel-loader' }
     ]
   },
   plugins: [
